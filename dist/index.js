@@ -135,7 +135,12 @@ function sendEvents(url, token, events) {
                     }
                 }
                 catch (error) {
-                    core.error(`Exception while sending HTTP event request`);
+                    if (typeof error === 'string') {
+                        core.info(error);
+                    }
+                    else if (error instanceof Error) {
+                        core.error(`Exception while sending HTTP event request:`.concat(error.message));
+                    }
                 }
             }
             else {

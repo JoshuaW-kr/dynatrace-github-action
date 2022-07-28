@@ -134,13 +134,14 @@ export async function sendEvents(
             `HTTP request failed with status code: ${res.message.statusCode})}`
           )
         }
-      } catch (error ) {
-        if (typeof error === "string"){
-
-        } else if (error  instanceof Error){
-          core.error(`Exception while sending HTTP event request:` + error.message)
+      } catch (error) {
+        if (typeof error === 'string') {
+          core.info(error)
+        } else if (error instanceof Error) {
+          core.error(
+            `Exception while sending HTTP event request:`.concat(error.message)
+          )
         }
-        
       }
     } else {
       core.info(`Unsupported event type!`)
